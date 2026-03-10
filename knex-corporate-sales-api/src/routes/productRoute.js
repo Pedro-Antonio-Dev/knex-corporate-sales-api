@@ -7,17 +7,17 @@ const router = express.Router()
 const productController = require("../controllers/productController")
 
 /* Middleware da Regra de Negocio */
-const authMiddleware = require("../middlewares/authMiddlewares")
+const authMiddlewares = require("../middlewares/authMiddlewares")
 
 /* GET Listar Produtos */
-router.get("/", authMiddleware, productController.list)
+router.get("/", authMiddlewares, productController.list)
 /* GET Pegar Produto Específico */
-router.get("/:id", authMiddleware, productController.getById)
+router.get("/:id", authMiddlewares, productController.getById)
 /* POST Cadastrar Produto */
-router.post("/", authMiddleware, productController.create)
+router.post("/", authMiddlewares, productController.create)
 /* PUT Editar Produto */
-router.put("/:id", authMiddleware, productController.update)
+router.put("/:id", authMiddlewares, productController.update)
 /* DELETE Excluir Produto */
-router.delete("/:id", authMiddleware, productController.remove)
+router.delete("/:id", authMiddlewares, productController.remove)
 
 module.exports = router
