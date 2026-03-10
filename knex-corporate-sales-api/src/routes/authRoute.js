@@ -3,6 +3,7 @@ const express = require("express")
 
 const router = express.Router()
 
+/* Controller para as autenticações */
 const authController = require("../controllers/authController")
 
 /* Rota de Registro */
