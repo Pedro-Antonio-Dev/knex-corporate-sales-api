@@ -1,0 +1,20 @@
+# environment variables
+.env
+
+# node modules
+node_modules/
+
+# logs
+logs
+*.log
+
+# sistema operacional
+.DS_Store
+Thumbs.db
+
+# build
+dist
+build
+
+# arquivos de teste locais
+coverage
