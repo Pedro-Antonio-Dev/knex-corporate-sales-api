@@ -1,4 +1,4 @@
-/* Controle para Registro e Login */
+/* Controller para Registro e Login */
 
 /* Criptografia de senha e token */
 const bcrypt = require("bcrypt")

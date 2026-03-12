@@ -11,14 +11,14 @@ const productController = require("../controllers/productController")
 const authMiddlewares = require("../middlewares/authMiddlewares")
 
 /* GET Listar Produtos */
-router.get("/", authMiddlewares, productController.list)
+router.get("/", productController.list)
 /* GET Pegar Produto Específico */
-router.get("/:id", authMiddlewares, productController.getById)
+router.get("/:id", productController.getById)
 /* POST Cadastrar Produto */
-router.post("/", authMiddlewares, productController.create)
+router.post("/", productController.create)
 /* PUT Editar Produto */
-router.put("/:id", authMiddlewares, productController.update)
+router.put("/:id", productController.update)
 /* DELETE Excluir Produto */
-router.delete("/:id", authMiddlewares, productController.remove)
+router.delete("/:id" ,productController.remove)
 
 module.exports = router
