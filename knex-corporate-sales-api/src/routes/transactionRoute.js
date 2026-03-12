@@ -10,9 +10,9 @@ const transactionController = require("../controllers/transactionController")
 const authMiddlewares = require("../middlewares/authMiddlewares")
 
 /* POST comprar */
-router.post("/", transactionController.buy)
+router.post("/",authMiddlewares, transactionController.buy)
 
 /* GET ver compras */
-router.get("/purchases", transactionController.myPurchases)
+router.get("/purchases",authMiddlewares, transactionController.myPurchases)
 
 module.exports = router

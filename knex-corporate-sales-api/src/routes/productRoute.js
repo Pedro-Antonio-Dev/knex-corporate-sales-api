@@ -1,4 +1,3 @@
-/*
 /* Rotas dos Produtos */
 const express = require("express")
 
@@ -11,14 +10,14 @@ const productController = require("../controllers/productController")
 const authMiddlewares = require("../middlewares/authMiddlewares")
 
 /* GET Listar Produtos */
-router.get("/", productController.list)
+router.get("/", authMiddlewares, productController.list)
 /* GET Pegar Produto Específico */
-router.get("/:id", productController.getById)
+router.get("/:id", authMiddlewares, productController.getById)
 /* POST Cadastrar Produto */
-router.post("/", productController.create)
+router.post("/", authMiddlewares, productController.create)
 /* PUT Editar Produto */
-router.put("/:id", productController.update)
+router.put("/:id", authMiddlewares, productController.update)
 /* DELETE Excluir Produto */
-router.delete("/:id" ,productController.remove)
+router.delete("/:id", authMiddlewares, productController.remove)
 
 module.exports = router
