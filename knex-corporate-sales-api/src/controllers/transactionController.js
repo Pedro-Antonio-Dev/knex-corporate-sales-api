@@ -10,13 +10,13 @@ transactionController.buy = async (req, res) => {
 
     try {
         
-        const {product_id} = req.body
+        const {id} = req.params
 
         const user_id = req.user.id
 
         const product = await db.query(
             "SELECT * FROM products WHERE id = $1",
-            [product_id]
+            [id]
         )
 
         if(product.rows.length === 0) {
@@ -29,7 +29,7 @@ transactionController.buy = async (req, res) => {
             `INSERT INTO transactions (user_id, product_id)
             VALUES ($1, $2)
             RETURNING *`,
-            [user_id, product_id]
+            [user_id, id]
         )
 
         res.status(201).json(transaction.rows[0])

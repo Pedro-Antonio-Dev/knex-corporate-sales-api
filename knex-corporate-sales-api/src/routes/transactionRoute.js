@@ -10,7 +10,7 @@ const transactionController = require("../controllers/transactionController")
 const authMiddlewares = require("../middlewares/authMiddlewares")
 
 /* POST comprar */
-router.post("/",authMiddlewares, transactionController.buy)
+router.post("/:id",authMiddlewares, transactionController.buy)
 
 /* GET ver compras */
 router.get("/purchases",authMiddlewares, transactionController.myPurchases)
