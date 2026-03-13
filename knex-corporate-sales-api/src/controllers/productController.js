@@ -60,8 +60,13 @@ productController.create = async (req, res) => {
     try {
         
         const {name, price} = req.body
-
         const company_id = req.user.company_id
+
+        if(!company_id) {
+            return res.status(403).json({
+                message: "Você não tem permissão para criar produtos"
+            })
+        }
 
         const newProduct = await db.query(
             `INSERT INTO products (name, price, company_id)
