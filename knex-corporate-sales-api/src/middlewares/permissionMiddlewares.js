@@ -25,7 +25,7 @@ const permissionMiddlewares = async (req, res, next) => {
 
         if(productCompanyId !== userCompanyId) {
             return res.status(403).json({
-                message: "Você não tem autorização para alterar esse produto"
+                message: "Você não tem autorização para alterar o catalogo dessa compania"
             })
         }
 

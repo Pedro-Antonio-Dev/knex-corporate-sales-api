@@ -59,7 +59,9 @@ productController.create = async (req, res) => {
 
     try {
         
-        const {name, price, company_id} = req.body
+        const {name, price} = req.body
+
+        const company_id = req.user.company_id
 
         const newProduct = await db.query(
             `INSERT INTO products (name, price, company_id)

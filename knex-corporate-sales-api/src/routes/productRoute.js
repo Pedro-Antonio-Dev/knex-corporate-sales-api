@@ -15,7 +15,7 @@ router.get("/", authMiddlewares, productController.list)
 /* GET Pegar Produto Específico */
 router.get("/:id", authMiddlewares, productController.getById)
 /* POST Cadastrar Produto */
-router.post("/", authMiddlewares, productController.create)
+router.post("/", authMiddlewares, permissionMiddlewares, productController.create)
 /* PUT Editar Produto */
 router.put("/:id", authMiddlewares, permissionMiddlewares, productController.update)
 /* DELETE Excluir Produto */
