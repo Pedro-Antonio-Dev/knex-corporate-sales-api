@@ -314,7 +314,7 @@ A API pode ser testada utilizando a **collection do Postman incluída no reposit
 Passos para utilizar:
 
 1. Abra o Postman
-2. Importe a collection presente no projeto
+2. Importe a collection presente no projeto (src/docs/postman)
 3. Execute as requisições disponíveis
 4. Utilize o token retornado no login para acessar as rotas protegidas
 

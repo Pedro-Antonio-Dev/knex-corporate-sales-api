@@ -1,0 +1,355 @@
+{
+  "info": {
+    "_postman_id": "4ad2d168-b269-4866-8129-c6b7099f0fed",
+    "name": "corporate-sales API",
+    "description": "# Knex Corporate Sales API\n\nEsta API foi desenvolvida como **case técnico para o processo seletivo de Desenvolvedor na empresa Knex**.\n\nA aplicação consiste em uma **API REST para gerenciamento de vendas corporativas**, permitindo que usuários se registrem, realizem login, visualizem produtos disponíveis e efetuem compras.\n\nO sistema também permite o gerenciamento completo de produtos e o acompanhamento do histórico de compras dos usuários autenticados.\n\nA autenticação é feita utilizando **JWT (JSON Web Token)** para garantir segurança nas rotas protegidas.\n\n---\n\n# 🚀 Funcionalidades\n\n- Registro de usuários\n    \n- Login com autenticação JWT\n    \n- Listagem de produtos\n    \n- Consulta de produto específico\n    \n- Criação de produtos\n    \n- Atualização de produtos\n    \n- Remoção de produtos\n    \n- Compra de produtos\n    \n- Visualização das compras realizadas pelo usuário\n    \n\n---\n\n# 🔐 Autenticação\n\nAlguns endpoints exigem autenticação via **Bearer Token**.\n\nApós realizar login, a API retornará um token JWT que deve ser enviado no header das requisições protegidas.\n\nExemplo:\n\nAuthorization: Bearer {token}\n\n---\n\n# 📦 Estrutura dos Endpoints\n\n## Auth\n\nPOST /auth/register → Registrar novo usuário  \nPOST /auth/login → Autenticar usuário\n\n---\n\n## Products\n\nGET /products → Listar todos os produtos  \nGET /products/ → Listar produto específico  \nPOST /products → Criar produto  \nPUT /products/ → Atualizar produto  \nDELETE /products/ → Remover produto\n\n---\n\n## Transaction\n\nPOST /transaction/ → Comprar produto  \nGET /transaction/purchases → Listar compras do usuário autenticado\n\n---\n\n# 🛠 Tecnologias utilizadas\n\n- Node.js\n    \n- Express\n    \n- JWT (JSON Web Token)\n    \n- Banco de dados relacional\n    \n\n---\n\n# 📄 Observação\n\nEsta collection foi criada para facilitar os testes da API utilizando o **Postman**, permitindo que todos os endpoints sejam executados diretamente após importar esta collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53048659",
+    "_collection_link": "https://go.postman.co/collection/53048659-4ad2d168-b269-4866-8129-c6b7099f0fed?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "/auth",
+      "item": [
+        {
+          "name": "/register -> Registrar Usuario",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"example\",\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"example123\",\r\n    \"company_id\": \"integer (optional)\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/login -> Logar Usuario",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Após o login, você receberá a chave do seu Token como resposta, é necessário que você adicione ela manualmente na aba Authorization.\n\nO tipo de token já está selecionado."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/products",
+      "item": [
+        {
+          "name": "/ -> Listar Todos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/products/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "products",
+                ""
+              ]
+            },
+            "description": "Esta rota permite **listar todos os produtos cadastrados no sistema**.\n\nPara acessar esta funcionalidade, é necessário estar **logado e autenticado**.\n\nInsira o **token recebido no login** na aba **Authorization** para que o sistema valide sua autenticação.\n\nSe o token for válido, o sistema retornará **a lista de todos os produtos cadastrados**."
+          },
+          "response": []
+        },
+        {
+          "name": "/:id -> Listar Especifico",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/products/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "products",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Para acessar um **produto específico**, passe o **ID do produto** nos parâmetros da requisição.\n\nÉ necessário estar **logado e autenticado** para acessar esta rota.\n\nInsira o **token recebido no login** na aba **Authorization** para que o sistema valide sua autenticação.\n\nSe o token for válido, o sistema permitirá que você **visualize as informações do produto correspondente ao ID informado**."
+          },
+          "response": []
+        },
+        {
+          "name": "/ -> Criar Produto",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"example\",\r\n    \"price\": \"float (10.99)\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/products/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "products",
+                ""
+              ]
+            },
+            "description": "Esta rota permite **criar um novo produto no sistema**.\n\nPara utilizar esta funcionalidade, é necessário estar **logado e autenticado**.\n\nInsira o **token recebido no login** na aba **Authorization** para que o sistema consiga identificar o seu **company_id**.\n\nO produto será criado **vinculado à empresa associada ao usuário autenticado**, utilizando o **company_id presente no token**."
+          },
+          "response": []
+        },
+        {
+          "name": "/:id -> Editar Produto",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"New Name\",\r\n    \"price\": \"New Price (float)\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/products/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "products",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Passe o **ID do produto** nos parâmetros da requisição. Você precisa estar **logado e autenticado** para editar um produto.\n\nInsira o **token recebido no login** na aba **Authorization** para que o sistema consiga identificar o seu **company_id**.\n\nSerá realizada uma verificação entre o **company_id do usuário** (extraído do token) e o **company_id do produto**.  \nSe forem iguais, significa que você é um colaborador da empresa responsável pelo produto.\n\nNesse caso, o sistema permitirá que você **edite as informações do produto**."
+          },
+          "response": []
+        },
+        {
+          "name": "/:id -> Deletar Produto",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/products/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "products",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Passe o **ID do produto** nos parâmetros da requisição. Você precisa estar **logado e autenticado** para deletar um produto.\n\nInsira o **token recebido no login** na aba **Authorization** para que o sistema consiga identificar o seu **company_id**.\n\nSerá realizada uma verificação entre o **company_id do usuário** (extraído do token) e o **company_id do produto**.  \nSe forem iguais, significa que você é um colaborador da empresa responsável pelo produto.\n\nNesse caso, o sistema permitirá que você **delete o produto**."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "/transaction",
+      "item": [
+        {
+          "name": "/:id -> Comprar Produto",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/transaction/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "transaction",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Esta rota permite **realizar a compra de um produto**.\n\nPara utilizar esta funcionalidade, é necessário estar **logado e autenticado**.\n\nInsira o **token recebido no login** na aba **Authorization** para que o sistema valide sua autenticação e identifique o seu **company_id**.\n\nPasse o **ID do produto** nos parâmetros da requisição.  \nSe o produto existir e estiver disponível, o sistema registrará a **compra do produto para a empresa associada ao usuário autenticado**."
+          },
+          "response": []
+        },
+        {
+          "name": "/purchases -> Listar Compras",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/transaction/purchases",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "transaction",
+                "purchases"
+              ]
+            },
+            "description": "Esta rota permite **listar todas as compras realizadas pelo usuário autenticado**.\n\nPara acessar esta funcionalidade, é necessário estar **logado e autenticado**.\n\nInsira o **token recebido no login** na aba **Authorization** para que o sistema valide sua autenticação e identifique o seu **user_id**.\n\nO sistema utilizará o **user_id presente no token** para retornar **todas as compras realizadas pelo usuário autenticado**."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
